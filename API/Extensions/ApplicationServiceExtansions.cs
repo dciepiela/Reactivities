@@ -1,7 +1,9 @@
-﻿using Application.Activities.Queries;
+﻿using Application.Activities.Commands;
+using Application.Activities.Queries;
 using Application.Core;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
+using System.Reflection;
 
 namespace API.Extensions
 {
