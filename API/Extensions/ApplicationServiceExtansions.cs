@@ -1,6 +1,8 @@
 ﻿using Application.Activities.Commands;
 using Application.Activities.Queries;
 using Application.Core;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 using System.Reflection;
@@ -36,6 +38,8 @@ namespace API.Extensions
 
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 
+            services.AddFluentValidationAutoValidation();
+            services.AddValidatorsFromAssemblyContaining<CreateActivityHandler>();
             return services;
         }
     }

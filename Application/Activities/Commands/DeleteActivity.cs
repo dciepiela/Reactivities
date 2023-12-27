@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Application.Core;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.Activities.Commands
 {
-    public class DeleteActivity: IRequest
+    public class DeleteActivity: IRequest<Result<Unit>>
     {
         public Guid Id { get; set; }
     }

@@ -1,10 +1,11 @@
-﻿using Domain;
+﻿using Application.Core;
+using Domain;
 using MediatR;
 using System;
 
 namespace Application.Activities.Queries
 {
-    public class GetActivityById :IRequest<Activity>
+    public class GetActivityById :IRequest<Result<Activity>>
     {
         public Guid Id { get; set; }
     }

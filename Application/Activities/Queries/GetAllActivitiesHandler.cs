@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using Application.Core;
+using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Application.Activities.Queries
 {
-    public class GetAllActivitiesHandler : IRequestHandler<GetAllActivities, List<Activity>>
+    public class GetAllActivitiesHandler : IRequestHandler<GetAllActivities,Result<List<Activity>>>
     {
         private readonly DataContext _context;
 
@@ -18,10 +19,10 @@ namespace Application.Activities.Queries
             _context = context;
         }
 
-        public async Task<List<Activity>> Handle(GetAllActivities request, CancellationToken cancellationToken)
+        public async Task<Result<List<Activity>>> Handle(GetAllActivities request, CancellationToken cancellationToken)
         {
             var activities = await _context.Activities.ToListAsync();
-            return activities;
+            return Result<List<Activity>>.Success(activities);
         }
     }
 }
