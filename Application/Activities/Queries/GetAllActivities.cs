@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Application.Activities.Queries
 {
-    public class GetAllActivities : IRequest<Result<List<Activity>>>
+    public class GetAllActivities : IRequest<Result<List<ActivityDto>>>
     {
     }
 }

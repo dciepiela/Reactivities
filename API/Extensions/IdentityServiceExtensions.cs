@@ -4,10 +4,12 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Persistence;
 using System.Text;
+using Infrastracture.Security;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Extensions
 {
-    public static class IdentityServiceExtansions
+    public static class IdentityServiceExtensions
     {
         public static IServiceCollection AddIdentityServices(this IServiceCollection services,IConfiguration config)
         {
@@ -31,6 +33,15 @@ namespace API.Extensions
                     };
                 });
 
+
+            services.AddAuthorization(opt =>
+            {
+                opt.AddPolicy("IsActivityHost", policy =>
+                {
+                    policy.Requirements.Add(new IsHostRequirement());
+                });
+            });
+            services.AddTransient<IAuthorizationHandler, IsHostRequirementHandler>();
 
             services.AddScoped<TokenService>();
 

@@ -1,12 +1,8 @@
 ﻿using Application.Activities.Commands;
 using Application.Activities.Queries;
 using Domain;
-using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Persistence;
 
 namespace API.Controllers
 {
@@ -20,7 +16,6 @@ namespace API.Controllers
             return HandleResult(response);
         }
 
-        [Authorize]
         [HttpGet("{id}")] //api/activities/fdfdfdfdf
         public async Task<IActionResult> GetActivityById(Guid id)
         {
@@ -39,6 +34,7 @@ namespace API.Controllers
             return HandleResult(result);
         }
 
+        [Authorize(Policy ="IsActivityHost")]
         [HttpPut("{id}")]
         public async Task<IActionResult> EditActivity(Guid id, Activity activity)
         {
@@ -47,12 +43,20 @@ namespace API.Controllers
             return HandleResult(result);
         }
 
+        [Authorize(Policy = "IsActivityHost")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteActivity(Guid id)
         {
             var command = new DeleteActivity { Id = id };
             var result = await Mediator.Send(command);
             return HandleResult(result);
+        }
+
+        [HttpPost("{id}/attend")]
+
+        public async Task<IActionResult> Attend(Guid id)
+        {
+            return HandleResult(await Mediator.Send(new UpdateAttendance { Id = id }));
         }
 
     }

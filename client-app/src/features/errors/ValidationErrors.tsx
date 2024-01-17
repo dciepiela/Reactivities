@@ -4,9 +4,9 @@ interface Props {
   errors: string[];
 }
 
-export default function ValidationError({ errors }: Props) {
+export default function ValidationErrors({ errors }: Props) {
   return (
-    <Message error>
+    <Message negative>
       {errors && (
         <MessageList>
           {errors.map((err: string, i) => (
