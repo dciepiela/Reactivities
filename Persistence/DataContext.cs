@@ -12,11 +12,11 @@ namespace Persistence
 
         public DbSet<Activity> Activities { get; set; }
         public DbSet<ActivityAttendee> ActivityAttendees { get; set;}
+        public DbSet<Photo> Photos { get; set;}
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
             //many to many
             //ActivityAttendee ma klucz główny składający sie z dwóch kolumn
             builder.Entity<ActivityAttendee>()
@@ -31,7 +31,6 @@ namespace Persistence
 
             // Ta konfiguracja określa relację wiele do jednego między encjami ActivityAttendee a Activity.
             // ActivityAttendee ma jedno Activity, a Activity może mieć wiele Attendees.
-
             builder.Entity<ActivityAttendee>()
                 .HasOne(aa => aa.Activity)
                 .WithMany(a => a.Attendees)
