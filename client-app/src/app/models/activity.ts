@@ -41,6 +41,7 @@ export class Activity implements IActivity {
     host?: Profile
     attendees?: Profile[]
 }
+
 export class ActivityFormValues {
     id?:string  =undefined;
     title: string = '';
