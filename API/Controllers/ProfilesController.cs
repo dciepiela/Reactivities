@@ -13,5 +13,13 @@ namespace API.Controllers
             var result = await Mediator.Send(command);
             return HandleResult(result);
         }
+
+       [HttpPut]
+        public async Task<IActionResult> EditProfile(Edit.Command command)
+        {
+
+            var result = await Mediator.Send(command);
+            return HandleResult(result);
+        }
     }
 }
