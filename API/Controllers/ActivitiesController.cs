@@ -1,4 +1,5 @@
-﻿using Application.Activities.Commands;
+﻿using Application.Activities;
+using Application.Activities.Commands;
 using Application.Activities.Queries;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
@@ -9,11 +10,11 @@ namespace API.Controllers
     public class ActivitiesController:BaseApiController
     {
         [HttpGet] //api/activities
-        public async Task<IActionResult> GetActivities()
+        public async Task<IActionResult> GetActivities([FromQuery]ActivityParams param)
         {
-            var query = new GetAllActivities();
+            var query = new GetAllActivities { Params = param };
             var response = await Mediator.Send(query);
-            return HandleResult(response);
+            return HandlePagedResult(response);
         }
 
         [HttpGet("{id}")] //api/activities/fdfdfdfdf
