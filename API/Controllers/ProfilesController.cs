@@ -17,7 +17,14 @@ namespace API.Controllers
        [HttpPut]
         public async Task<IActionResult> EditProfile(Edit.Command command)
         {
+            var result = await Mediator.Send(command);
+            return HandleResult(result);
+        }
 
+        [HttpGet("{username}/activities")]
+        public async Task<IActionResult> GetUserActivities(string username, string predicate)
+        {
+            var command = new ListActivities.Query { Username = username, Predicate = predicate };
             var result = await Mediator.Send(command);
             return HandleResult(result);
         }

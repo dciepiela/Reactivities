@@ -44,7 +44,7 @@ namespace Application.Activities.Queries
 
             if (request.Params.IsHost && !request.Params.IsGoing)
             {
-                query = query.Where(x => x.HostUsername == _userAccessor.GetUsername()); // aktualnie zalogowany użytkownik
+                query = query.Where(x => x.HostUsername == _userAccessor.GetUsername());
             }
 
 
