@@ -33,7 +33,7 @@ export default observer(function ProfilePhotos({ profile }: Props) {
   //stan lokalny
   const [addPhotoMode, setAddPhotoMode] = useState(false);
 
-  const [target, setTarget] = useState();
+  const [target, setTarget] = useState("");
 
   function handlePhotoUpload(file: Blob) {
     uploadPhoto(file).then(() => setAddPhotoMode(false));
