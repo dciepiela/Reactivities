@@ -54,7 +54,6 @@ namespace API.Controllers
         }
 
         [HttpPost("{id}/attend")]
-
         public async Task<IActionResult> Attend(Guid id)
         {
             var command = new UpdateAttendance { Id = id };

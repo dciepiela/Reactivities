@@ -31,11 +31,11 @@ app.UseXXssProtection(options => options.EnabledWithBlockMode());
 app.UseXfo(options => options.Deny());
 app.UseCsp(options => options
     .BlockAllMixedContent()
-    .StyleSources(s => s.Self().CustomSources("https://fonts.googleapis.com"))
+    .StyleSources(s => s.Self().CustomSources("https://fonts.googleapis.com","sha256-DpOoqibK/BsYhobWHnU38Pyzt5SjDZuR/mFsAiVN7kk="))
     .FontSources(s => s.Self().CustomSources("https://fonts.gstatic.com", "data:"))
     .FrameAncestors(s => s.Self())
-    .ImageSources(s => s.Self().CustomSources("blob:", "https://res.cloudinary.com"))
-    .ScriptSources(s => s.Self())
+    .ImageSources(s => s.Self().CustomSources("blob:","data:", "https://res.cloudinary.com","https://platform-lookaside.fbsbx.com"))
+    .ScriptSources(s => s.Self().CustomSources("https://connect.facebook.net"))
 ); //crossSiteScripting
 
 if (app.Environment.IsDevelopment())
