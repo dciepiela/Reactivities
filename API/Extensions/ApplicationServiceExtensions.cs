@@ -27,6 +27,7 @@ namespace API.Extensions
 
             services.AddDbContext<DataContext>(options =>
             {
+                
                 var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
                 string connStr;
@@ -72,6 +73,7 @@ namespace API.Extensions
                         .AllowAnyHeader()
                         .AllowAnyMethod()
                         .AllowCredentials()
+                        .WithExposedHeaders("WWW-Authenticate", "Pagination")
                         .WithOrigins("http://localhost:3000", "https://localhost:3000");
                 });
             });
