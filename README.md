@@ -37,3 +37,5 @@ The application can be available on various platforms, including web browsers an
 - Cloudinary
 - FacebookApi
 - Twilio SendGrid
+- Docker
+- Deploying on Fly.io (https://reactivities-sample-app.fly.dev/)
