@@ -6,6 +6,7 @@ using Persistence;
 using System.Text;
 using Infrastracture.Security;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace API.Extensions
 {
@@ -16,8 +17,11 @@ namespace API.Extensions
             services.AddIdentityCore<AppUser>(options =>
             {
                 options.Password.RequireNonAlphanumeric = false;
-                options.User.RequireUniqueEmail = true;
-            }).AddEntityFrameworkStores<DataContext>();
+                options.SignIn.RequireConfirmedEmail = true;
+            })
+                .AddEntityFrameworkStores<DataContext>()
+                .AddSignInManager<SignInManager<AppUser>>()
+                .AddDefaultTokenProviders();
 
             var tokenKey = config.GetSection("TokenKey").Value;
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey));
